@@ -16,5 +16,5 @@ Just create a symbolic link from `~/.emacs` to `dotemacs/dot_emacs`.
 ### Python packages:
 
 1. Jedi: http://tkf.github.com/emacs-jedi/
-  1.1 python-epc (sudo pip install epc)
-  1.2 Jedi (sudo pip install jedi)
+  1. python-epc (sudo pip install epc)
+  2. Jedi (sudo pip install jedi)
