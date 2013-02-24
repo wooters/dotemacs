@@ -1,0 +1,76 @@
+;; disable startup message
+(setq inhibit-startup-message t)
+
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+(add-to-list 'load-path "~/.emacs.d/")
+
+(when (require 'auto-complete-config nil 'noerror) ;; don't break if not installed 
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+  (setq ac-comphist-file  "~/.emacs.d/ac-comphist.dat")
+  (ac-config-default))
+
+(setq jedi:setup-keys t)
+(add-hook 'python-mode-hook 'jedi:setup)
+(require 'jedi)
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;; display time
+(setq display-time-24hr-format t)
+(display-time)
+
+;; Activate font-lock-mode (syntax coloring)
+(global-font-lock-mode t)
+
+;; Goto-line short-cut key                                                                                                   
+(global-set-key "\C-xl" 'goto-line)
+
+;; parentheses highlighting
+(show-paren-mode 1)
+(setq blink-matching-paren t)
+
+;; Show line number in the mode line
+(line-number-mode 1)
+
+;; Show column number in the mode line
+(column-number-mode 1)
+
+;; Set the fill column
+(setq-default fill-column 72)
+
+;; Indent size
+(setq standard-indent 4)
+
+;; Highlight the current line
+(global-hl-line-mode 1)
+
+;;
+;; Emacs normally uses both tabs and spaces to indent lines. If you
+;; prefer, all indentation can be made from spaces only. To request this,
+;; set `indent-tabs-mode' to `nil'. This is a per-buffer variable;
+;; altering the variable affects only the current buffer, but it can be
+;; disabled for all buffers.
+;;
+;; Use (setq ...) to set value locally to a buffer
+;; Use (setq-default ...) to set value globally 
+;;
+(setq-default indent-tabs-mode nil) 
+
+;; ===== Turn on Auto Fill mode automatically in all modes =====
+;; Auto-fill-mode causes the automatic wrapping of lines and insertion of
+;; newlines when the cursor goes over the column limit.
+;; This should actually turn on auto-fill-mode by default in all major
+;; modes. The other way to do this is to turn on the fill for specific modes
+;; via hooks.
+(setq auto-fill-mode 1)
+
+;; ===== Make Text mode the default mode for new buffers =====
+(setq default-major-mode 'text-mode)
+
