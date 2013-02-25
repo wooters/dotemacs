@@ -49,7 +49,7 @@
 (setq standard-indent 4)
 
 ;; Highlight the current line
-(global-hl-line-mode 1)
+(global-hl-line-mode 0)
 
 ;;
 ;; Emacs normally uses both tabs and spaces to indent lines. If you
