@@ -1,6 +1,22 @@
+;;
+;; NOTES:
+;;
+;;     - To reload a file: M-x load-file
+;;     - To execute a sexp, move the point to the end of the sexp and press c-x c-e
+;;     - To see the value of a variable, move point on top of var, then: c-h v
+;;     - Rectangle mode: 
+;;          replace contents of rect w/ string: c-x r t
+;;     - Start kbd macro: F3, stop macro: F4, playback: F4
+;;
+
+;; Turn off mouse interface early in startup to avoid momentary display
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ;; disable startup message
 (setq inhibit-startup-message t)
 
+;; Package manager stuff
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -26,11 +42,49 @@
 (setq display-time-24hr-format t)
 (display-time)
 
+;; Bind C-x g to webjump
+(global-set-key (kbd "C-x g") 'webjump)
+;; Add Urban Dictionary to webjump
+(eval-after-load "webjump"
+'(add-to-list 'webjump-sites
+              '("Urban Dictionary" .
+                [simple-query
+                 "www.urbandictionary.com"
+                 "http://www.urbandictionary.com/define.php?term="
+                 ""])))
+
+;; Save point position between sessions
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name ".places" user-emacs-directory))
+
+;; Write backup files to their own directory
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+
+;; Make backups of files, even when they're in version control
+(setq vc-make-backup-files t)
+
 ;; Activate font-lock-mode (syntax coloring)
 (global-font-lock-mode t)
 
-;; Goto-line short-cut key                                                                                                   
-(global-set-key "\C-xl" 'goto-line)
+;; Goto-line short-cut key                                                                                     (global-set-key "\C-xl" 'goto-line)
+
+;; Remap  the goto-line function to a function
+;; that temporarily turns on line numbers.
+(global-set-key [remap goto-line] 'goto-line-with-feedback)
+
+;; Create a function to temporarily show line numbers
+(defun goto-line-with-feedback ()
+  "Show line numbers temporarily, while prompting for the line number input"
+  (interactive)
+  (unwind-protect
+      (progn
+        (linum-mode 1)
+        (goto-line (read-number "Goto line: ")))
+    (linum-mode -1)))
+
 
 ;; parentheses highlighting
 (show-paren-mode 1)
