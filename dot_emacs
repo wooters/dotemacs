@@ -38,6 +38,12 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
+(require 'multiple-cursors)
+(global-set-key (kbd "C-c C-c") 'mc/mark-all-in-region)
+(global-set-key (kbd "C-c >") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c <") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c a") 'mc/mark-all-like-this)
+
 ;; display time
 (setq display-time-24hr-format t)
 (display-time)
@@ -69,7 +75,8 @@
 ;; Activate font-lock-mode (syntax coloring)
 (global-font-lock-mode t)
 
-;; Goto-line short-cut key                                                                                     (global-set-key "\C-xl" 'goto-line)
+;; Goto-line short-cut key
+(global-set-key (kbd "C-x l") 'goto-line)
 
 ;; Remap  the goto-line function to a function
 ;; that temporarily turns on line numbers.
@@ -84,7 +91,6 @@
         (linum-mode 1)
         (goto-line (read-number "Goto line: ")))
     (linum-mode -1)))
-
 
 ;; parentheses highlighting
 (show-paren-mode 1)
