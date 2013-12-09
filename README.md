@@ -13,9 +13,10 @@ My personal .emacs file.
 
 ### Emacs packages:
 
-1. [yasnippet](https://github.com/capitaomorte/yasnippet)
-2. [jedi](http://tkf.github.com/emacs-jedi)
-
+1. yasnippet
+2. jedi
+3. expand-region 
+4. multiple-cursors
 
 ### Python packages:
 
