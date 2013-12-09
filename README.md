@@ -7,7 +7,7 @@ My personal .emacs file.
 1. Clone repo (e.g. into `~/dotemacs`)
 2. Back up old .emacs `cd; cp .emacs .emacs.bak`
 3. Create a link: `ln -s ~/dotemacs/dot_emacs ~/.emacs`
-4. `mkdir ~/.emacs.d/snippets`
+4. `mkdir -p ~/.emacs.d/snippets`
 
 ## Requirements
 
