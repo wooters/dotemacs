@@ -16,13 +16,20 @@
 ;; disable startup message
 (setq inhibit-startup-message t)
 
-;; Package manager stuff
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
+(cond
+  ((= 24 emacs-major-version)
+  ;; evaluate version 24 code
+
+  ;; Package manager stuff
+  (require 'package)
+  (add-to-list 'package-archives
+               '("marmalade" . "http://marmalade-repo.org/packages/") t)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (package-initialize)
+
+  ))
+
 
 (add-to-list 'load-path "~/.emacs.d/")
 
